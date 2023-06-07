@@ -4,7 +4,7 @@ const router = express.Router();
 
 const initWebRouter = (app) => {
     router.get("/",homeController.getHomePage)
-    router.get("/pages/single_page.html",homeController.getSinglePage)
+    router.get("/single_page.html",homeController.getSinglePage)
     router.get("/404.html",homeController.getErrorPage)
     router.get("/index.html",homeController.getHomePage)
     router.get("/contact.html",homeController.getContactPage)
@@ -16,7 +16,7 @@ const initWebRouter = (app) => {
     router.get("/User",homeController.getUser)
     router.get("/editUser/:id",homeController.editUser)
     router.post("/updateUser",homeController.updateUser)
+    router.post("/addUser",homeController.addUser)
     return app.use('/',router)
 };
-
 export default initWebRouter;

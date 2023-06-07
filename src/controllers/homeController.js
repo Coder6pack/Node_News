@@ -37,7 +37,7 @@ const getAuth = async(req,res) =>{
        await pool.query('select * from user where account = ? and password = ?',[account,password],(err,result,fields) =>{
             if(err) throw err;
             if(result.length > 0){
-               return res.redirect('/')
+            return res.redirect('/')
             } else {
                 response.send('Incorrect Username and/or Password!');
 			}			
@@ -66,10 +66,16 @@ const editUser = async(req,res) =>{
 }
 
 const updateUser = async(req,res) =>{
-    console.log("check: ",req.body);
+    
     let {name,email,account,password,quyen,id} = req.body
     await pool.execute('UPDATE user SET name =?,email=?,account=?,password=?,quyen=? Where id=?',[name,email,account,password,quyen,id])
     return res.redirect('/')
+}
+
+const addUser = async(req,res)=>{
+    let {name,email,account,password,quyen} = req.body
+    await pool.execute('INSERT INTO user(name,email,account,password,quyen) VALUES(?,?,?,?,?)',[name,email,account,password,quyen])
+    return res.redirect("/")
 }
 module.exports ={
     getHomePage,
@@ -82,5 +88,6 @@ module.exports ={
     getUser,
     deleteUser,
     editUser,
-    updateUser
+    updateUser,
+    addUser
 }
