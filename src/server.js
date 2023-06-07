@@ -1,6 +1,7 @@
 const express = require("express");
 const path = require("path");
 import configViewEngine from "./configs/viewEngine";
+import initWebRouter from "./routers/web"
 require("dotenv").config();
 
 const app = express();
@@ -9,11 +10,8 @@ configViewEngine(app);
 app.use(express.static(path.join(__dirname, "public")));
 app.set("view engine", ".ejs");
 app.set("views", path.join(__dirname, "./views"));
-app.get("/", (req, res) => {
-  // res.send("Hello");
-  res.render("pages/layout", { content: "index" });
-});
 
+initWebRouter(app)
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
