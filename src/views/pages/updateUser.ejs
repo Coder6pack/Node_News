@@ -1,0 +1,25 @@
+
+    <form action="/updateUser" class="contact_form" method="post">
+        <div class="">
+            <label>Name</label>
+            <input class="form-control" type="text" placeholder="Name*" name="name" value="<%= dataUser.name %>">
+        </div>
+        <div class="">
+            <label>Email</label>
+            <input class="form-control" type="email" placeholder="Email*" name="email" value="<%= dataUser.email %>">
+        </div>
+        <div class="">
+            <label>Account</label>
+            <input class="form-control" type="text" placeholder="Account*" name="account" value="<%= dataUser.account %>">
+        </div>
+        <div class="">
+            <label>Password</label>
+            <input class="form-control" type="text" placeholder="Password*" name="password" value="<%= dataUser.password %>">
+        </div>
+        <div class="">
+            <label>Quyen</label>
+            <input class="form-control" type="text" placeholder="Quyen" name="quyen" value="<%= dataUser.quyen %>">
+        </div>
+        <input type="text" name="id" value="<%= dataUser.id %>" hidden>
+        <button type="submit" >Save</button>
+    </form>
