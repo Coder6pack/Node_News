@@ -1,0 +1,35 @@
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Account</th>
+        <th scope="col">Password</th>
+        <th scope="col">Quyen</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+        <% for(let i=0; i < dataUser.length; i++) { %>
+            <tr>
+              <td><%= dataUser[i].id %></td>
+              <td><%= dataUser[i].name %></td>
+              <td><%= dataUser[i].email %></td>
+              <td><%= dataUser[i].account %></td>
+              <td><%= dataUser[i].password %></td>
+              <td><%= dataUser[i].quyen %></td>
+              <td>
+                <button><a href="Deltail/user/<%= dataUser[i].id %>">Detail</a></button>
+                <form action="/editUser/<%= dataUser[i].id %>" method="get">
+                    <button type="submit">Update</button>
+                </form>
+                <form action="/deleteUser" method="post">
+                    <button type="submit">Delete</button>
+                    <input type="text" hidden value="<%= dataUser[i].id %>" name ="userId" >
+                </form>
+              </td>
+            </tr>
+         <% } %>
+    </tbody>
+  </table>
