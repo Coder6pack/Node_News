@@ -1,0 +1,9 @@
+
+<form action="/updateCategory" class="contact_form" method="post">
+    <div class="">
+        <label>Name</label>
+        <input class="form-control" type="text" placeholder="Name*" name="name" value="<%= dataCategory.name %>">
+    </div>
+    <input type="text" name="id" value="<%= dataCategory.id %>" hidden>
+    <button type="submit" >Save</button>
+</form>

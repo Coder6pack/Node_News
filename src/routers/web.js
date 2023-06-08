@@ -17,6 +17,11 @@ const initWebRouter = (app) => {
     router.get("/editUser/:id",homeController.editUser)
     router.post("/updateUser",homeController.updateUser)
     router.post("/addUser",homeController.addUser)
+    router.get("/Category",homeController.getCategory)
+    router.post("/deleteCategory",homeController.deleteCategory)
+    router.get("/editCategory/:id",homeController.editCategory)
+    router.post("/updateCategory",homeController.updateCategory)
+    // router.post("/addCategory",homeController.addCategory)
     return app.use('/',router)
 };
 export default initWebRouter;

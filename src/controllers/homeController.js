@@ -34,9 +34,11 @@ const getAuth = async(req,res) =>{
     let password = req.body.password
     console.log(account,password);
     if(account && password){
-       await pool.query('select * from user where account = ? and password = ?',[account,password],(err,result,fields) =>{
+    await pool.query('select account,password from user where account = ? and password = ?',[account,password],(err,result,fields) =>{
             if(err) throw err;
             if(result.length > 0){
+                session.username = account
+                session.password = password
             return res.redirect('/')
             } else {
                 response.send('Incorrect Username and/or Password!');
@@ -77,6 +79,26 @@ const addUser = async(req,res)=>{
     await pool.execute('INSERT INTO user(name,email,account,password,quyen) VALUES(?,?,?,?,?)',[name,email,account,password,quyen])
     return res.redirect("/")
 }
+
+const getCategory = async(req,res) =>{
+    const [rows, fields] = await pool.execute('SELECT * FROM `danhmuc`');
+    return res.render('pages/layout',{content:'Category',dataCategory:rows})
+}
+const deleteCategory = async(req,res) =>{
+    let CategoryId = req.body.categoryId
+    await pool.execute(`delete from danhmuc where id =?`,[CategoryId])
+    return res.redirect('/')
+}
+const editCategory =async (req,res) =>{
+    let id = req.params.id
+    let [Category] = await pool.execute('select * from danhmuc where id =?',[id])
+    return res.render('pages/layout',{content:'editCategory',dataCategory:Category[0]})
+}
+const updateCategory = async (req,res) =>{
+    let {name,id} = req.body
+    await pool.execute('UPDATE danhmuc SET name =? Where id=?',[name,id])
+    return res.redirect('/')
+}
 module.exports ={
     getHomePage,
     getSinglePage,
@@ -89,5 +111,9 @@ module.exports ={
     deleteUser,
     editUser,
     updateUser,
-    addUser
+    addUser,
+    getCategory,
+    deleteCategory,
+    editCategory,
+    updateCategory
 }
